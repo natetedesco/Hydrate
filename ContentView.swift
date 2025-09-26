@@ -103,7 +103,7 @@ struct ContentView: View {
         .background(.white.opacity(0.1))
         .sheet(isPresented: $showingWaterOptions) {
             AddWaterSheet(waterIntake: $waterIntake)
-                .presentationDetents([.height(300)])
+                .presentationDetents([.height(400)])
         }
         .sheet(isPresented: $showingStreakView) {
             StreakView()

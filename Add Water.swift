@@ -10,67 +10,81 @@ import SwiftUI
 struct AddWaterSheet: View {
     @Binding var waterIntake: Double
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedOptionIndex = 1 // Default to first option (8oz)
     
     let waterOptions = [
-        (amount: 1.0, title: "Glass", subtitle: "8 fl oz", icon: "cup.and.saucer.fill"),
-        (amount: 2.0, title: "Large Glass", subtitle: "16 fl oz", icon: "takeoutbag.and.cup.and.straw.fill"),
-        (amount: 3.0, title: "Bottle", subtitle: "24 fl oz", icon: "waterbottle.fill"),
-        (amount: 4.0, title: "Large Bottle", subtitle: "32 fl oz", icon: "waterbottle.fill")
+        (amount: 1.0, title: "Cup", subtitle: "8 fl oz", icon: "mug.fill"),
+        (amount: 2.0, title: "Bottle", subtitle: "16 fl oz", icon: "waterbottle.fill"),
+        (amount: 3.0, title: "Large Bottle", subtitle: "24 fl oz", icon: "waterbottle.fill"),
+        (amount: 4.0, title: "Huge Bottle", subtitle: "32 fl oz", icon: "waterbottle.fill")
     ]
     
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                VStack(spacing: 8) {
-//                    Image(systemName: "drop.circle.fill")
-//                        .font(.system(size: 40))
-//                        .foregroundColor(.accent)
-                    
-                    Text("Add Water")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-
-                }
-//                .padding(.bottom)
+                Spacer()
                 
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ], spacing: 16) {
-                    ForEach(waterOptions.indices, id: \.self) { index in
-                        let option = waterOptions[index]
-                        
-                        Button(action: {
-                            waterIntake += option.amount
-                            dismiss()
-                        }) {
-                            VStack(spacing: 8) {
-                                Image(systemName: option.icon)
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.accent)
-                                
-                                VStack(spacing: 4) {
-                                    Text(option.title)
-                                        .font(.headline)
-                                        .fontWeight(.medium)
+                // Horizontal scroll view with water options
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 96) {
+                        ForEach(waterOptions.indices, id: \.self) { index in
+                            let option = waterOptions[index]
+                            let isSelected = selectedOptionIndex == index
+                            
+                            Button(action: {
+                                selectedOptionIndex = index
+                            }) {
+                                VStack(spacing: 12) {
+                                    Image(systemName: option.icon)
+                                        .font(.system(size: 48))
+                                        .foregroundColor(isSelected ? .accent : .secondary)
                                     
-                                    Text(option.subtitle)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                    VStack(spacing: 4) {
+                                        Text(option.title)
+                                            .font(.title3)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(isSelected ? .primary : .secondary)
+                                        
+                                        Text(option.subtitle)
+                                            .font(.subheadline)
+                                            .foregroundColor(isSelected ? .primary : .secondary)
+                                    }
                                 }
+                                .scaleEffect(isSelected ? 1.2 : 1.0)
+                                .animation(.easeInOut(duration: 0.2), value: isSelected)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical)
-                            .background(.accent.opacity(0.1))
-                            .cornerRadius(32)
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
+                    .frame(maxHeight: .infinity)
+                    .padding(.horizontal, 20)
                 }
-                .padding(.horizontal)
                 
                 Spacer()
+                
+                // Add button at the bottom
+                Button(action: {
+                    waterIntake += waterOptions[selectedOptionIndex].amount
+                    dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        
+                        Text("Add \(waterOptions[selectedOptionIndex].subtitle)")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 24)
+                    .background(.accent, in: .capsule)
+                    .foregroundColor(.white)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 20)
             }
+            .navigationTitle("Add Water")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -87,6 +101,6 @@ struct AddWaterSheet: View {
     ContentView()
         .sheet(isPresented: .constant(true)) {
             AddWaterSheet(waterIntake: .constant(20))
-                .presentationDetents([.height(300)])
+                .presentationDetents([.medium])
         }
 }
