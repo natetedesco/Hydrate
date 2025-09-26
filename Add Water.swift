@@ -22,16 +22,16 @@ struct AddWaterSheet: View {
         NavigationView {
             VStack(spacing: 20) {
                 VStack(spacing: 8) {
-                    Image(systemName: "drop.circle.fill")
-                        .font(.system(size: 40))
-                        .foregroundColor(.accent)
+//                    Image(systemName: "drop.circle.fill")
+//                        .font(.system(size: 40))
+//                        .foregroundColor(.accent)
                     
                     Text("Add Water")
                         .font(.title2)
                         .fontWeight(.semibold)
 
                 }
-                .padding(.bottom)
+//                .padding(.bottom)
                 
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
@@ -44,7 +44,7 @@ struct AddWaterSheet: View {
                             waterIntake += option.amount
                             dismiss()
                         }) {
-                            VStack(spacing: 12) {
+                            VStack(spacing: 8) {
                                 Image(systemName: option.icon)
                                     .font(.system(size: 24))
                                     .foregroundColor(.accent)
@@ -60,9 +60,9 @@ struct AddWaterSheet: View {
                                 }
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 20)
+                            .padding(.vertical)
                             .background(.accent.opacity(0.1))
-                            .cornerRadius(28)
+                            .cornerRadius(32)
                         }
                         .buttonStyle(.plain)
                     }
@@ -83,6 +83,10 @@ struct AddWaterSheet: View {
     }
 }
 
-//#Preview {
-//    AddWaterSheet()
-//}
+#Preview {
+    ContentView()
+        .sheet(isPresented: .constant(true)) {
+            AddWaterSheet(waterIntake: .constant(20))
+                .presentationDetents([.height(300)])
+        }
+}

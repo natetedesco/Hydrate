@@ -11,7 +11,7 @@ struct SettingsView: View {
     @Binding var dailyGoal: Double
     @Environment(\.dismiss) private var dismiss
     
-    @State private var tempDailyGoal: Double = 8
+    @State private var tempDailyGoal: Double = 64
     @State private var notificationsEnabled: Bool = true
     @State private var reminderInterval: Int = 2 // hours
     @State private var startTime: Date = {
@@ -33,7 +33,7 @@ struct SettingsView: View {
                     Section("Daily Goal") {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
-                                Text("Glasses per day")
+                                Text("Ounces per day")
                                     .font(.body)
                                 
                                 Spacer()
@@ -44,7 +44,7 @@ struct SettingsView: View {
                                     .foregroundColor(.accent)
                             }
                             
-                            Slider(value: $tempDailyGoal, in: 4...16, step: 1) {
+                            Slider(value: $tempDailyGoal, in: 32...128, step: 8) {
                                 Text("Daily Goal")
                             }
                             .accentColor(.accent)
@@ -109,6 +109,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(dailyGoal: .constant(8))
+    SettingsView(dailyGoal: .constant(64))
         .fontDesign(.rounded)
 }

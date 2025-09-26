@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var waterIntake: Double = 0
-    @State private var dailyGoal: Double = 8 // glasses of water
+    @State private var dailyGoal: Double = 64 // ounces of water
     @State private var showingWaterOptions = false
     @State private var showingStreakView = false
     @State private var showingSettingsView = false
@@ -103,7 +103,7 @@ struct ContentView: View {
         .background(.white.opacity(0.1))
         .sheet(isPresented: $showingWaterOptions) {
             AddWaterSheet(waterIntake: $waterIntake)
-                .presentationDetents([.medium])
+                .presentationDetents([.height(300)])
         }
         .sheet(isPresented: $showingStreakView) {
             StreakView()
