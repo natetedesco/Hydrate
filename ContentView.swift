@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var showingWaterOptions = false
     @State private var showingStreakView = false
     @State private var showingSettingsView = false
+    @State private var showingGoalAchieved = false
+    @State private var hasShownGoalToday = false
     
     var progress: Double {
         min(waterIntake / dailyGoal, 1.0)
@@ -100,7 +102,7 @@ struct ContentView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal)
-        .background(.white.opacity(0.1))
+        .background(backgroundColor)
         .sheet(isPresented: $showingWaterOptions) {
             AddWaterSheet(waterIntake: $waterIntake)
                 .presentationDetents([.height(400)])
@@ -110,6 +112,16 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingSettingsView) {
             SettingsView(dailyGoal: $dailyGoal)
+        }
+        .fullScreenCover(isPresented: $showingGoalAchieved) {
+            GoalAchievedView()
+        }
+        .onChange(of: waterIntake) { _, newValue in
+            // Check if goal is reached and we haven't shown the sheet today
+            if newValue >= dailyGoal && !hasShownGoalToday {
+                showingGoalAchieved = true
+                hasShownGoalToday = true
+            }
         }
     }
 }

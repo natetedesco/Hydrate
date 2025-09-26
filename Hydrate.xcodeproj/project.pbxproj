@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2778B12E8732E1000BE3FA /* GoalAchievedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2778B02E8732E1000BE3FA /* GoalAchievedView.swift */; };
 		8B5129012E8651C800DB673B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5128FF2E8651C800DB673B /* ContentView.swift */; };
 		8B5129022E8651C800DB673B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5129002E8651C800DB673B /* App.swift */; };
 		8B5129072E86542900DB673B /* Water Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5129062E86542900DB673B /* Water Bucket.swift */; };
 		8B5129092E86583300DB673B /* Add Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5129082E86583300DB673B /* Add Water.swift */; };
 		8B51290B2E86588E00DB673B /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51290A2E86588E00DB673B /* StreakView.swift */; };
 		8B51290D2E86589D00DB673B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51290C2E86589D00DB673B /* SettingsView.swift */; };
-		8B51291D2E865DBB00DB673B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51291C2E865DBB00DB673B /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B2778B02E8732E1000BE3FA /* GoalAchievedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAchievedView.swift; sourceTree = "<group>"; };
 		8B3D1FE72E864E2E0043A750 /* Hydrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hydrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5128FF2E8651C800DB673B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B5129002E8651C800DB673B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -24,7 +25,6 @@
 		8B5129082E86583300DB673B /* Add Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add Water.swift"; sourceTree = "<group>"; };
 		8B51290A2E86588E00DB673B /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 		8B51290C2E86589D00DB673B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		8B51291C2E865DBB00DB673B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -50,12 +50,12 @@
 			isa = PBXGroup;
 			children = (
 				8B5129002E8651C800DB673B /* App.swift */,
-				8B51291C2E865DBB00DB673B /* Model.swift */,
 				8B5128FF2E8651C800DB673B /* ContentView.swift */,
 				8B5129062E86542900DB673B /* Water Bucket.swift */,
 				8B51290A2E86588E00DB673B /* StreakView.swift */,
 				8B51290C2E86589D00DB673B /* SettingsView.swift */,
 				8B5129082E86583300DB673B /* Add Water.swift */,
+				8B2778B02E8732E1000BE3FA /* GoalAchievedView.swift */,
 				8B3D1FE92E864E2E0043A750 /* Hydrate */,
 				8B3D1FE82E864E2E0043A750 /* Products */,
 			);
@@ -143,11 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B51291D2E865DBB00DB673B /* Model.swift in Sources */,
 				8B51290B2E86588E00DB673B /* StreakView.swift in Sources */,
 				8B5129012E8651C800DB673B /* ContentView.swift in Sources */,
 				8B5129022E8651C800DB673B /* App.swift in Sources */,
 				8B51290D2E86589D00DB673B /* SettingsView.swift in Sources */,
+				8B2778B12E8732E1000BE3FA /* GoalAchievedView.swift in Sources */,
 				8B5129092E86583300DB673B /* Add Water.swift in Sources */,
 				8B5129072E86542900DB673B /* Water Bucket.swift in Sources */,
 			);

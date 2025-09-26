@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+let backgroundColor = Color(red: 20/255, green: 20/255, blue: 20/255)
+
+
 @main
 struct HydrateApp: App {
     var body: some Scene {
@@ -16,3 +19,4 @@ struct HydrateApp: App {
         }
     }
 }
+
