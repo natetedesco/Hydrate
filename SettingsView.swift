@@ -11,7 +11,6 @@ struct SettingsView: View {
     @Binding var dailyGoal: Double
     @Environment(\.dismiss) private var dismiss
     
-    @State private var tempDailyGoal: Double = 64
     @State private var notificationsEnabled: Bool = true
     @State private var reminderInterval: Int = 2 // hours
     @State private var startTime: Date = {
@@ -38,13 +37,13 @@ struct SettingsView: View {
                                 
                                 Spacer()
                                 
-                                Text("\(Int(tempDailyGoal))")
+                                Text("\(Int(dailyGoal))")
                                     .font(.body)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.accent)
                             }
                             
-                            Slider(value: $tempDailyGoal, in: 32...128, step: 8) {
+                            Slider(value: $dailyGoal, in: 32...128, step: 8) {
                                 Text("Daily Goal")
                             }
                             .accentColor(.accent)
@@ -96,14 +95,10 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("", systemImage: "xmark") {
-                        dailyGoal = tempDailyGoal
                         dismiss()
                     }
                 }
             }
-        }
-        .onAppear {
-            tempDailyGoal = dailyGoal
         }
     }
 }
