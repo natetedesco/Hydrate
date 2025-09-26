@@ -25,40 +25,46 @@ struct AddWaterSheet: View {
             VStack(spacing: 20) {
                 Spacer()
                 
-                // Horizontal scroll view with water options
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 64) {
-                        ForEach(waterOptions.indices, id: \.self) { index in
-                            let option = waterOptions[index]
-                            let isSelected = selectedOptionIndex == index
-                            
-                            Button(action: {
-                                selectedOptionIndex = index
-                            }) {
-                                VStack(spacing: 12) {
-                                    Image(systemName: option.icon)
-                                        .font(.system(size: 48))
-                                        .foregroundColor(isSelected ? .accent : .secondary)
-                                    
-                                    VStack(spacing: 4) {
-                                        Text(option.title)
-                                            .font(.title3)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(isSelected ? .primary : .secondary)
+                // Horizontal scroll view with water options, scrolls to selected on appear
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 64) {
+                            ForEach(waterOptions.indices, id: \.self) { index in
+                                let option = waterOptions[index]
+                                let isSelected = selectedOptionIndex == index
+                                
+                                Button(action: {
+                                    selectedOptionIndex = index
+                                }) {
+                                    VStack(spacing: 12) {
+                                        Image(systemName: option.icon)
+                                            .font(.system(size: 48))
+                                            .foregroundColor(isSelected ? .accent : .secondary)
                                         
-                                        Text(option.subtitle)
-                                            .font(.subheadline)
-                                            .foregroundColor(isSelected ? .primary : .secondary)
+                                        VStack(spacing: 4) {
+                                            Text(option.title)
+                                                .font(.title3)
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(isSelected ? .primary : .secondary)
+                                            
+                                            Text(option.subtitle)
+                                                .font(.subheadline)
+                                                .foregroundColor(isSelected ? .primary : .secondary)
+                                        }
                                     }
+                                    .scaleEffect(isSelected ? 1.2 : 1.0)
+                                    .animation(.easeInOut(duration: 0.2), value: isSelected)
                                 }
-                                .scaleEffect(isSelected ? 1.2 : 1.0)
-                                .animation(.easeInOut(duration: 0.2), value: isSelected)
+                                .buttonStyle(.plain)
+                                .id(index)
                             }
-                            .buttonStyle(.plain)
                         }
+                        .frame(maxHeight: .infinity)
+                        .padding(.horizontal, 160)
                     }
-                    .frame(maxHeight: .infinity)
-                    .padding(.horizontal, 160)
+                    .onAppear {
+                        proxy.scrollTo(selectedOptionIndex, anchor: .center)
+                    }
                 }
                 
                 Spacer()
