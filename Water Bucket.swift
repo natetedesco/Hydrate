@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WaterBucket: View {
     @State private var waveOffset: CGFloat = 0
+    let progress: Double // Progress from 0.0 to 1.0
     
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct WaterBucket: View {
             // Wave layers with proper clipping
             ZStack {
                 // Back wave
-                WaveShape(offset: waveOffset, amplitude: 15, frequency: 1.2)
+                WaveShape(offset: waveOffset, amplitude: 15, frequency: 1.2, progress: progress)
                     .fill(
                         LinearGradient(
                             colors: [Color.accent.opacity(0.8), Color.accent.opacity(0.6)],
@@ -31,7 +32,7 @@ struct WaterBucket: View {
                     )
                 
                 // Front wave
-                WaveShape(offset: waveOffset + 50, amplitude: 10, frequency: 1.5)
+                WaveShape(offset: waveOffset + 50, amplitude: 10, frequency: 1.5, progress: progress)
                     .fill(
                         LinearGradient(
                             colors: [Color.accent.opacity(0.9), Color.accent.opacity(0.7)],
@@ -56,6 +57,7 @@ struct WaveShape: Shape {
     var offset: CGFloat
     let amplitude: CGFloat
     let frequency: CGFloat
+    let progress: Double // Progress from 0.0 to 1.0
     
     var animatableData: CGFloat {
         get { offset }
@@ -67,14 +69,18 @@ struct WaveShape: Shape {
         
         let width = rect.width
         let height = rect.height
-        let midHeight = height * 0.5
         
-        path.move(to: CGPoint(x: 0, y: midHeight))
+        // Calculate the wave height based on progress
+        // When progress is 0, wave should be at bottom (height)
+        // When progress is 1, wave should be at top (height * 0.1 to leave some room)
+        let waveHeight = height * (1.0 - progress * 0.9)
+        
+        path.move(to: CGPoint(x: 0, y: waveHeight))
         
         for x in stride(from: 0, through: width, by: 2) {
             let relativeX = x / width
             let sine = sin((relativeX * frequency * 2 * .pi) + (offset * .pi / 180))
-            let y = midHeight + sine * amplitude
+            let y = waveHeight + sine * amplitude
             path.addLine(to: CGPoint(x: x, y: y))
         }
         
@@ -88,5 +94,5 @@ struct WaveShape: Shape {
 }
 
 #Preview {
-    WaterBucket()
+    WaterBucket(progress: 0.7) // 70% filled for preview
 }

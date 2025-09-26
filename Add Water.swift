@@ -13,10 +13,10 @@ struct AddWaterSheet: View {
     @State private var selectedOptionIndex = 1 // Default to first option (8oz)
     
     let waterOptions = [
-        (amount: 1.0, title: "Cup", subtitle: "8 fl oz", icon: "mug.fill"),
-        (amount: 2.0, title: "Bottle", subtitle: "16 fl oz", icon: "waterbottle.fill"),
-        (amount: 3.0, title: "Large Bottle", subtitle: "24 fl oz", icon: "waterbottle.fill"),
-        (amount: 4.0, title: "Huge Bottle", subtitle: "32 fl oz", icon: "waterbottle.fill")
+        (amount: 8.0, title: "Cup", subtitle: "8 fl oz", icon: "mug.fill"),
+        (amount: 16.0, title: "Bottle", subtitle: "16 fl oz", icon: "waterbottle.fill"),
+        (amount: 24.0, title: "Large Bottle", subtitle: "24 fl oz", icon: "waterbottle.fill"),
+        (amount: 32.0, title: "Huge Bottle", subtitle: "32 fl oz", icon: "waterbottle.fill")
     ]
     
     var body: some View {

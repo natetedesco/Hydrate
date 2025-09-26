@@ -36,7 +36,7 @@ struct ContentView: View {
             
             Spacer()
             
-            WaterBucket()
+            WaterBucket(progress: progress)
             
             
             // Stats
