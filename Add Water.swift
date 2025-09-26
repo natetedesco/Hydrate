@@ -10,9 +10,10 @@ import SwiftUI
 struct AddWaterSheet: View {
     @Binding var waterIntake: Double
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedOptionIndex = 1 // Default to first option (8oz)
+    @State private var selectedOptionIndex = 2 // Default to first option (8oz)
     
     let waterOptions = [
+        (amount: 4.0, title: "Small Cup", subtitle: "4 fl oz", icon: "cup.and.saucer.fill"),
         (amount: 8.0, title: "Cup", subtitle: "8 fl oz", icon: "mug.fill"),
         (amount: 16.0, title: "Bottle", subtitle: "16 fl oz", icon: "waterbottle.fill"),
         (amount: 24.0, title: "Large Bottle", subtitle: "24 fl oz", icon: "waterbottle.fill"),
@@ -26,7 +27,7 @@ struct AddWaterSheet: View {
                 
                 // Horizontal scroll view with water options
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 96) {
+                    HStack(spacing: 64) {
                         ForEach(waterOptions.indices, id: \.self) { index in
                             let option = waterOptions[index]
                             let isSelected = selectedOptionIndex == index
@@ -57,7 +58,7 @@ struct AddWaterSheet: View {
                         }
                     }
                     .frame(maxHeight: .infinity)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 160)
                 }
                 
                 Spacer()
@@ -68,21 +69,17 @@ struct AddWaterSheet: View {
                     dismiss()
                 }) {
                     HStack {
-                        Image(systemName: "plus")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                        
                         Text("Add \(waterOptions[selectedOptionIndex].subtitle)")
                             .font(.title3)
                             .fontWeight(.semibold)
                     }
+                    .font(.title3)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
                     .background(.accent, in: .capsule)
                     .foregroundColor(.white)
                 }
                 .padding(.horizontal, 24)
-                .padding(.bottom, 20)
             }
             .navigationTitle("Add Water")
             .navigationBarTitleDisplayMode(.inline)

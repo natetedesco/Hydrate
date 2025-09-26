@@ -20,29 +20,33 @@ struct WaterBucket: View {
                 .frame(width: 240, height: 240)
             
             // Wave layers with proper clipping
-            ZStack {
-                // Back wave
-                WaveShape(offset: waveOffset, amplitude: 15, frequency: 1.2, progress: progress)
-                    .fill(
-                        LinearGradient(
-                            colors: [Color.accent.opacity(0.8), Color.accent.opacity(0.6)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
+            if progress > 0 {
                 
-                // Front wave
-                WaveShape(offset: waveOffset + 50, amplitude: 10, frequency: 1.5, progress: progress)
-                    .fill(
-                        LinearGradient(
-                            colors: [Color.accent.opacity(0.9), Color.accent.opacity(0.7)],
-                            startPoint: .top,
-                            endPoint: .bottom
+                
+                ZStack {
+                    // Back wave
+                    WaveShape(offset: waveOffset, amplitude: 15, frequency: 1.2, progress: progress * 1.15)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color.accent.opacity(0.8), Color.accent.opacity(0.6)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
                         )
-                    )
+                    
+                    // Front wave
+                    WaveShape(offset: waveOffset + 50, amplitude: 10, frequency: 1.5, progress: progress * 1.15)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color.accent.opacity(0.9), Color.accent.opacity(0.7)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                }
+                .frame(width: 240, height: 240)
+                .clipShape(Circle())
             }
-            .frame(width: 240, height: 240)
-            .clipShape(Circle())
         }
         .onAppear {
             // Animate the waves much slower

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B2778B12E8732E1000BE3FA /* GoalAchievedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2778B02E8732E1000BE3FA /* GoalAchievedView.swift */; };
+		8B2778B92E8746C9000BE3FA /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2778B82E8746C9000BE3FA /* Test.swift */; };
 		8B5129012E8651C800DB673B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5128FF2E8651C800DB673B /* ContentView.swift */; };
 		8B5129022E8651C800DB673B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5129002E8651C800DB673B /* App.swift */; };
 		8B5129072E86542900DB673B /* Water Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5129062E86542900DB673B /* Water Bucket.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		8B2778B02E8732E1000BE3FA /* GoalAchievedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAchievedView.swift; sourceTree = "<group>"; };
+		8B2778B82E8746C9000BE3FA /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		8B3D1FE72E864E2E0043A750 /* Hydrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hydrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5128FF2E8651C800DB673B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B5129002E8651C800DB673B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 		8B3D1FDE2E864E2E0043A750 = {
 			isa = PBXGroup;
 			children = (
+				8B2778B82E8746C9000BE3FA /* Test.swift */,
 				8B5129002E8651C800DB673B /* App.swift */,
 				8B5128FF2E8651C800DB673B /* ContentView.swift */,
 				8B5129062E86542900DB673B /* Water Bucket.swift */,
@@ -148,6 +151,7 @@
 				8B5129022E8651C800DB673B /* App.swift in Sources */,
 				8B51290D2E86589D00DB673B /* SettingsView.swift in Sources */,
 				8B2778B12E8732E1000BE3FA /* GoalAchievedView.swift in Sources */,
+				8B2778B92E8746C9000BE3FA /* Test.swift in Sources */,
 				8B5129092E86583300DB673B /* Add Water.swift in Sources */,
 				8B5129072E86542900DB673B /* Water Bucket.swift in Sources */,
 			);
