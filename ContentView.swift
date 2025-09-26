@@ -27,14 +27,14 @@ struct ContentView: View {
             VStack(spacing: 10) {
                 Image("Hydrate")
                     .resizable()
-                    .frame(width: 40, height: 40)
+                    .frame(width: 36, height: 36)
                     .font(.system(size: 50))
                     .foregroundColor(.accent)
-                    .padding(.top)
+                    .padding(.top, 8)
                 
                 Text("Hydrate")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.title2)
+                    .fontWeight(.semibold)
             }
             
             Spacer()
@@ -112,7 +112,7 @@ struct ContentView: View {
             StreakView()
         }
         .sheet(isPresented: $showingSettingsView) {
-            SettingsView(dailyGoal: $dailyGoal)
+            SettingsView(dailyGoal: $dailyGoal, waterIntake: $waterIntake)
         }
         .fullScreenCover(isPresented: $showingGoalAchieved) {
             GoalAchievedView()

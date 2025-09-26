@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var dailyGoal: Double
+    @Binding var waterIntake: Double
     @Environment(\.dismiss) private var dismiss
     
     @State private var notificationsEnabled: Bool = true
@@ -26,75 +27,85 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            List {
+                Section("Daily Goal") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Text("Ounces per day")
+                                .font(.body)
+                            
+                            Spacer()
+                            
+                            Text("\(Int(dailyGoal))")
+                                .font(.body)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.accent)
+                        }
+                        
+                        Slider(value: $dailyGoal, in: 32...128, step: 8) {
+                            Text("Daily Goal")
+                        }
+                        .accentColor(.accent)
+                    }
+                    .padding(.vertical, 4)
+                    
+                    // Reset Water Intake Button
+                    Button(action: {
+                        waterIntake = 0
+                    }) {
+                        HStack {
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(.red)
+                            Text("Reset Today's Water Intake")
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
                 
-                List {
-                    Section("Daily Goal") {
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Text("Ounces per day")
-                                    .font(.body)
-                                
-                                Spacer()
-                                
-                                Text("\(Int(dailyGoal))")
-                                    .font(.body)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.accent)
-                            }
-                            
-                            Slider(value: $dailyGoal, in: 32...128, step: 8) {
-                                Text("Daily Goal")
-                            }
-                            .accentColor(.accent)
-                        }
-                        .padding(.vertical, 4)
-                    }
+                Section("Reminders") {
+                    Toggle("Reminder", isOn: $notificationsEnabled)
+                        .tint(.accent)
                     
-                    Section("Reminders") {
-                        Toggle("Reminder", isOn: $notificationsEnabled)
-                            .tint(.accent)
-                        
-                        if notificationsEnabled {
-                            HStack {
-                                Text("Reminder Frequency")
-                                Spacer()
-                                Picker("", selection: $reminderInterval) {
-                                    ForEach(reminderIntervals, id: \.self) { interval in
-                                        Text("Every \(interval)h")
-                                            .tag(interval)
-                                    }
+                    if notificationsEnabled {
+                        HStack {
+                            Text("Reminder Frequency")
+                            Spacer()
+                            Picker("", selection: $reminderInterval) {
+                                ForEach(reminderIntervals, id: \.self) { interval in
+                                    Text("Every \(interval)h")
+                                        .tag(interval)
                                 }
-                                .pickerStyle(.menu)
                             }
-                            
-                            DatePicker("Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
-                                .datePickerStyle(.compact)
-                            
-                            DatePicker("End Time", selection: $endTime, displayedComponents: .hourAndMinute)
-                                .datePickerStyle(.compact)
+                            .pickerStyle(.menu)
                         }
-                    }
-                    
-                    Section("About") {
-                        Text("Privacy Policy")
-                            .fontWeight(.medium)
                         
+                        DatePicker("Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(.compact)
                         
-                        Text("Stay Hydrated!")
-                            .fontWeight(.medium)
-                        
+                        DatePicker("End Time", selection: $endTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(.compact)
                     }
                 }
-                .listStyle(.insetGrouped)
-                .scrollContentBackground(.hidden)
+                
+                Section("About") {
+                    Text("Privacy Policy")
+                        .fontWeight(.medium)
+                    
+                    
+                    Text("Stay Hydrated!")
+                        .fontWeight(.medium)
+                    
+                }
             }
-            .padding(.top)
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("", systemImage: "xmark") {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("", systemImage: "checkmark") {
                         dismiss()
                     }
                 }
@@ -104,6 +115,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(dailyGoal: .constant(64))
+    SettingsView(dailyGoal: .constant(64), waterIntake: .constant(32))
         .fontDesign(.rounded)
 }
